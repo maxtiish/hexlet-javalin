@@ -7,13 +7,13 @@ public class HelloWorld {
         var app = Javalin.create(config -> {
             config.plugins.enableDevLogging();
         });
-        app.get("/users", ctx -> ctx.result("GET /users"));
-        app.post("/users", ctx -> ctx.result("POST /users"));
 
-        app.get("/hello", ctx -> {
-            var name = ctx.queryParamAsClass("name", String.class).getOrDefault("World");
-            ctx.result("Hello, " + name + "!");
+        app.get("/users/{id}/post/{postId}", ctx -> {
+            var postId = ctx.pathParam("postId");
+            var id = ctx.pathParam("id");
+            ctx.result("Id = " + id + " and Post Id = " + postId);
         });
+
         app.start(7070);
     }
 }
